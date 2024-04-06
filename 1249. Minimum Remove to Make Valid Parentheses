@@ -1,5 +1,15 @@
+Approach: 
 
+1)Iterate through each character of the input string.
+2)If the current character is an opening parenthesis '(':
+            Push its index onto the stack to mark its position.
+3)If the current character is a closing parenthesis ')':
+            (i)If the stack is not empty (meaning there is a matching opening parenthesis), pop the top index from the stack.
+            (ii)If the stack is empty, there's no matching opening parenthesis for this closing parenthesis, so erase it from the string and decrement the loop index (i) to adjust for the removed character.
+4)After processing all parentheses, remove any remaining unmatched opening parentheses by erasing them from the string.
+5)Return the modified string.
 
+This approach ensures that each closing parenthesis has a matching opening parenthesis and removes any excess parentheses to make the string valid.
 
 class Solution {
 public:
