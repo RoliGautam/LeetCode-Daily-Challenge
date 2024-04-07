@@ -1,0 +1,45 @@
+Given a string s containing only three types of characters: '(', ')' and '*', return true if s is valid.
+
+The following rules define a valid string:
+
+Any left parenthesis '(' must have a corresponding right parenthesis ')'.
+Any right parenthesis ')' must have a corresponding left parenthesis '('.
+Left parenthesis '(' must go before the corresponding right parenthesis ')'.
+'*' could be treated as a single right parenthesis ')' or a single left parenthesis '(' or an empty string "".
+ 
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "(*)"
+Output: true
+Example 3:
+
+Input: s = "(*))"
+Output: true
+
+APPROACH: In this code, low and high represent the smallest and largest possible number of open parentheses after processing the current character in the string. If we encounter a ‘(’, we increment both low and high. If we encounter a ‘)’, we decrement low and high. If low falls below 0, we reset it to 0 because we never want to have a negative count of open parentheses. If we encounter a ‘', we decrement low and increment high because '’ can be ‘(’, ‘)’, or an empty string. If at any point high falls below 0, we return false because we have more closing parentheses than opening parentheses. Finally, if low is 0 after processing all characters in the string, we return true because we have a valid string.
+
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int low = 0, high = 0;
+        for (char c : s) {
+            if (c == '(') {
+                low++;
+                high++;
+            } else if (c == ')') {
+                if (low > 0) low--;
+                high--;
+            } else { 
+                if (low > 0) low--;
+                high++;
+            }
+            if (high < 0) return false;
+        }
+        return low == 0;
+    }
+};
